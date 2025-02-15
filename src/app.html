@@ -2,8 +2,27 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- icons -->
+		<link rel="icon" href="%sveltekit.assets%/icons/favicon.png" />
+		<link
+			rel="apple-touch-icon"
+			href="%sveltekit.assets%/icons/apple-touch-icon.png"
+			sizes="180x180"
+		/>
+
+		<!-- PWA -->
+		<meta name="apple-mobile-web-app-title" content="StationQuest" />
+		<link rel="manifest" href="/manifest.json" />
+		<title>StationQuest</title>
+		<meta name="theme-color" content="#2160ec" />
+		<meta
+			name="description"
+			content="An app for exploring and tracking train station visits"
+		/>
+
+		<!-- SvelteKit head -->
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

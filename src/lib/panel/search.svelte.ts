@@ -42,7 +42,7 @@ class Search {
 		const response = await fetch(url, {
 			signal: controller.signal,
 			headers: {
-				'user-agent': `StationRecord/${VERSION} (+https://github.com/danstewart/StationRecord)`,
+				'user-agent': `StationQuest/${VERSION} (+https://github.com/danstewart/StationQuest)`,
 			},
 		});
 

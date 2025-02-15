@@ -16,7 +16,7 @@
 
 <div class="panel">
 	<header>
-		<h4>StationRecord</h4>
+		<h4>StationQuest</h4>
 		<small>v{VERSION}</small>
 	</header>
 
