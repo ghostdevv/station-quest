@@ -19,6 +19,7 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.0",
 		"ghostsui": "^1.6.0",
 		"lucide-svelte": "^0.475.0",
+		"paneforge": "^0.0.6",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"sass": "^1.85.0",
