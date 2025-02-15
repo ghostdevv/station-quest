@@ -18,7 +18,6 @@
 	<header>
 		<h4>StationRecord</h4>
 		<small>v{VERSION}</small>
-		<hr />
 	</header>
 
 	<input type="search" placeholder="Search..." bind:value={searchQuery} />
@@ -37,7 +36,7 @@
 						});
 					}}>
 					<strong>{station.name}</strong>
-					<small>({station.railway})</small>
+					<small>({station.railway?.replaceAll('_', ' ')})</small>
 				</button>
 			{/each}
 		{/if}
@@ -52,6 +51,10 @@
 		max-height: 100%;
 		padding: 22px;
 		min-width: 240px;
+
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
 
 		header {
 			h4 {
@@ -68,11 +71,11 @@
 	.results {
 		display: flex;
 		flex-direction: column;
-		margin: 8px 0px;
 		gap: 8px;
 
 		max-height: 100%;
 		overflow: auto;
+		flex-grow: 1;
 
 		.result {
 			text-align: left;

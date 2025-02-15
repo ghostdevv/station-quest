@@ -6,7 +6,7 @@ interface SearchResult {
 	osm_id: number;
 	rank: number;
 	name?: string;
-	railway?: 'station' | 'junction' | 'halt' | 'yard';
+	railway?: 'station' | 'junction' | 'halt' | 'yard' | 'tram_stop';
 	operator?: string;
 }
 
