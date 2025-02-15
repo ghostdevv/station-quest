@@ -58,6 +58,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+
+		&:focus .resizer-grip {
+			background-color: var(--primary);
+		}
 	}
 
 	.resizer-grip {
