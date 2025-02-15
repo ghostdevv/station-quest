@@ -1,10 +1,10 @@
 .map button {
-	display: flex;
+	display: flex !important;
 	align-items: center;
 	justify-content: center;
 
 	border-radius: 4px;
-	background: var(--background-secondary);
+	background-color: var(--background-secondary) !important;
 	border-color: var(--background-tertiary) !important;
 	color: #eee;
 
@@ -20,13 +20,13 @@
 	&:hover:not(&:disabled),
 	&.active {
 		border-color: #ddd;
-		/* background-color: rgba(var(--secondary-rgb), 0.5); */
+		background-color: rgba(var(--secondary-rgb), 0.5);
 		background-color: var(--primary);
 	}
 }
 
 .maplibregl-ctrl-group {
-	background-color: var(--background-secondary);
+	background-color: var(--background-secondary) !important;
 	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3) !important;
 }
 
