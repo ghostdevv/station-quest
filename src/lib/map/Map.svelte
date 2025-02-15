@@ -3,6 +3,7 @@
 	import IconTrack from 'lucide-svelte/icons/train-track';
 	import IconAntenna from 'lucide-svelte/icons/antenna';
 	import IconGauge from 'lucide-svelte/icons/gauge';
+	import { onMount, tick } from 'svelte';
 	import {
 		MapLibre,
 		NavigationControl,
@@ -16,11 +17,18 @@
 	} from 'svelte-maplibre-gl';
 
 	const STYLES = ['standard', 'signals', 'maxspeed'];
-
 	let style = $state('standard');
+
+	let map = $state<maplibregl.Map>();
+
+	onMount(async () => {
+		await tick();
+		map?.resize();
+	});
 </script>
 
 <MapLibre
+	bind:map
 	class="map"
 	style="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
 	zoom={4}
