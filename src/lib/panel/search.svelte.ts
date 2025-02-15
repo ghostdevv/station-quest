@@ -1,0 +1,58 @@
+// import { version } from '../../../package.json';
+
+const version = '0.1.0';
+
+interface SearchResult {
+	latitude: number;
+	longitude: number;
+	osm_id: number;
+	rank: number;
+	name?: string;
+	railway?: 'station' | 'junction' | 'halt' | 'yard';
+	operator?: string;
+}
+
+class Search {
+	#results = $state<SearchResult[]>([]);
+	#abortController = $state<AbortController | null>(null);
+
+	get results() {
+		return this.#results;
+	}
+
+	get searching() {
+		return !!this.#abortController;
+	}
+
+	async search(query: string) {
+		console.log('Searching', query);
+		this.#abortController?.abort('new query');
+
+		const controller = new AbortController();
+		this.#abortController = controller;
+
+		const url = new URL('https://api.openrailwaymap.org/v2/facility');
+		url.searchParams.set('name', query);
+
+		const response = await fetch(url, {
+			signal: controller.signal,
+			headers: {
+				'user-agent': `StationRecord/${version} (+https://github.com/danstewart/StationRecord)`,
+			},
+		});
+
+		if (!response.ok) {
+			// todo
+			return;
+		}
+
+		if (controller.signal.aborted) {
+			// todo
+			return;
+		}
+
+		this.#results = await response.json();
+	}
+}
+
+export const search = new Search();

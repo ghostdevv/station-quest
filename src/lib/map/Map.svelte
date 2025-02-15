@@ -3,6 +3,7 @@
 	import IconTrack from 'lucide-svelte/icons/train-track';
 	import IconAntenna from 'lucide-svelte/icons/antenna';
 	import IconGauge from 'lucide-svelte/icons/gauge';
+	import { ctx } from '$lib/state.svelte';
 	import { onMount, tick } from 'svelte';
 	import {
 		MapLibre,
@@ -20,6 +21,11 @@
 	let style = $state('standard');
 
 	let map = $state<maplibregl.Map>();
+
+	$effect(() => {
+		$inspect.trace();
+		ctx.map = map || null;
+	});
 
 	onMount(async () => {
 		await tick();
@@ -40,7 +46,7 @@
 	<GeolocateControl />
 	<RasterTileSource
 		id="railway"
-		attribution={`Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Style: <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a> <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a>`}
+		attribution={`Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Style: <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a> <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a> Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Service by <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a>`}
 		tiles={[
 			`https://a.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
 			`https://b.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
