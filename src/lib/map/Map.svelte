@@ -13,7 +13,6 @@
 		RasterTileSource,
 		RasterLayer,
 		CustomControl,
-		FullScreenControl,
 		GeolocateControl,
 		AttributionControl,
 	} from 'svelte-maplibre-gl';
@@ -48,7 +47,6 @@
 	<AttributionControl compact position="top-right" />
 	<NavigationControl position={mainControlPosition} />
 	<GlobeControl position={mainControlPosition} />
-	<FullScreenControl position={mainControlPosition} />
 	<GeolocateControl position={mainControlPosition} />
 	<CustomControl position={mainControlPosition}>
 		<button

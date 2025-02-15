@@ -18,6 +18,7 @@
 	});
 
 	let panelMin = $derived(Math.ceil((284 / innerWidth) * 100));
+	let collapsed = $state(false);
 </script>
 
 <svelte:window bind:innerWidth />
@@ -26,7 +27,10 @@
 	<Pane
 		defaultSize={direction == 'horizontal' ? panelMin : 33}
 		minSize={direction == 'horizontal' ? panelMin : 33}
-		order={direction == 'horizontal' ? 1 : 2}>
+		order={direction == 'horizontal' ? 1 : 2}
+		onCollapse={() => (collapsed = true)}
+		onExpand={() => (collapsed = false)}
+		collapsible>
 		<Panel />
 	</Pane>
 
@@ -35,7 +39,10 @@
 		onDraggingChange={(v: boolean) => {
 			isDragging = v;
 		}}>
-		<div class="resizer-grip {direction}" class:active={isDragging}>
+		<div
+			class="resizer-grip {direction}"
+			class:active={isDragging}
+			class:collapsed>
 			{#if direction == 'horizontal'}
 				<IconGripVertical size={18} />
 			{:else}
@@ -78,11 +85,21 @@
 		&.horizontal {
 			padding: 6px 2px;
 			margin: 0px -4px;
+
+			&.collapsed {
+				margin-right: -11px;
+				margin-left: 0px;
+			}
 		}
 
 		&.vertical {
 			padding: 2px 6px;
 			margin: -4px 0px;
+
+			&.collapsed {
+				margin-top: -11px;
+				margin-bottom: 0px;
+			}
 		}
 
 		&:hover,
