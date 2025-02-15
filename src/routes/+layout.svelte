@@ -9,5 +9,7 @@
 <style>
 	main {
 		padding: 22px;
+		width: 100dvw;
+		height: 100dvh;
 	}
 </style>

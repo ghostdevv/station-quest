@@ -1,1 +1,5 @@
-<h1>Hello World</h1>
+<script lang="ts">
+	import Map from '$lib/map/Map.svelte';
+</script>
+
+<Map />
