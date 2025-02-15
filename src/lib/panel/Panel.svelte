@@ -55,6 +55,7 @@
 			}
 
 			small {
+				display: inline-block;
 				color: var(--text-grey);
 			}
 		}
