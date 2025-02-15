@@ -8,8 +8,6 @@
 	let searchQuery = $state('');
 	const debouncedSearch = new Debounced(() => searchQuery.trim());
 
-	$inspect(searchQuery);
-
 	$effect(() => {
 		debouncedSearch.current;
 		untrack(() => search.search(debouncedSearch.current));

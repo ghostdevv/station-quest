@@ -2,17 +2,20 @@
 	import IconGripHorizontal from 'lucide-svelte/icons/grip-horizontal';
 	import IconGripVertical from 'lucide-svelte/icons/grip-vertical';
 	import { Pane, PaneGroup, PaneResizer } from 'paneforge';
+	import { type Direction, ctx } from '$lib/state.svelte';
 	import Panel from '$lib/panel/Panel.svelte';
 	import Map from '$lib/map/Map.svelte';
 
 	let isDragging = $state(false);
 	let innerWidth = $state(0);
 
-	type Direction = 'vertical' | 'horizontal';
-
 	let direction: Direction = $derived(
 		innerWidth <= 830 ? 'vertical' : 'horizontal',
 	);
+
+	$effect(() => {
+		ctx.direction = direction;
+	});
 
 	let panelMin = $derived(Math.ceil((284 / innerWidth) * 100));
 </script>

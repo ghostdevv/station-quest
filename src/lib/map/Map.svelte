@@ -15,15 +15,19 @@
 		CustomControl,
 		FullScreenControl,
 		GeolocateControl,
+		AttributionControl,
 	} from 'svelte-maplibre-gl';
 
 	const STYLES = ['standard', 'signals', 'maxspeed'];
 	let style = $state('standard');
 
+	let mainControlPosition: maplibregl.ControlPosition = $derived(
+		ctx.direction == 'horizontal' ? 'top-left' : 'bottom-right',
+	);
+
 	let map = $state<maplibregl.Map>();
 
 	$effect(() => {
-		$inspect.trace();
 		ctx.map = map || null;
 	});
 
@@ -38,24 +42,15 @@
 	class="map"
 	style="https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json"
 	zoom={4}
-	center={{ lng: -0.114, lat: 51.503 }}>
-	<NavigationControl />
-	<ScaleControl />
-	<GlobeControl />
-	<FullScreenControl />
-	<GeolocateControl />
-	<RasterTileSource
-		id="railway"
-		attribution={`Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Style: <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a> <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a> Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Service by <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a>`}
-		tiles={[
-			`https://a.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
-			`https://b.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
-			`https://c.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
-		]}
-		tileSize={256}>
-		<RasterLayer id="railway-layer" source="railway" />
-	</RasterTileSource>
-	<CustomControl position="top-right">
+	center={{ lng: -0.114, lat: 51.503 }}
+	attributionControl={false}>
+	<ScaleControl position="bottom-left" />
+	<AttributionControl compact position="top-right" />
+	<NavigationControl position={mainControlPosition} />
+	<GlobeControl position={mainControlPosition} />
+	<FullScreenControl position={mainControlPosition} />
+	<GeolocateControl position={mainControlPosition} />
+	<CustomControl position={mainControlPosition}>
 		<button
 			title="Map Style: {style}"
 			onclick={() => {
@@ -70,4 +65,16 @@
 			{/if}
 		</button>
 	</CustomControl>
+
+	<RasterTileSource
+		id="railway"
+		attribution={`Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Style: <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a> <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a> Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Service by <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a>`}
+		tiles={[
+			`https://a.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
+			`https://b.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
+			`https://c.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
+		]}
+		tileSize={256}>
+		<RasterLayer id="railway-layer" source="railway" />
+	</RasterTileSource>
 </MapLibre>
