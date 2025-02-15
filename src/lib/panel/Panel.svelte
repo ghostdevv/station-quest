@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { search } from './search.svelte';
 	import { ctx } from '$lib/state.svelte';
+	import { VERSION } from '$lib/version';
 	import { Debounced } from 'runed';
 	import { untrack } from 'svelte';
 
@@ -15,8 +16,11 @@
 </script>
 
 <div class="panel">
-	<h3>StationRecord</h3>
-	<hr />
+	<header>
+		<h3>StationRecord</h3>
+		<small>v{VERSION}</small>
+		<hr />
+	</header>
 
 	<input type="search" bind:value={searchQuery} />
 
@@ -44,6 +48,16 @@
 		height: 100%;
 		padding: 22px;
 		min-width: 240px;
+
+		header {
+			h3 {
+				display: inline-block;
+			}
+
+			small {
+				color: var(--text-grey);
+			}
+		}
 	}
 
 	.results {
