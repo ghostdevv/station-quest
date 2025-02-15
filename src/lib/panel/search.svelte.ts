@@ -57,6 +57,7 @@ class Search {
 		}
 
 		this.#results = await response.json();
+		this.#abortController = null;
 	}
 }
 

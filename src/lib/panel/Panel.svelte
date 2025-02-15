@@ -24,19 +24,23 @@
 	<input type="search" placeholder="Search..." bind:value={searchQuery} />
 
 	<div class="results">
-		{#each search.results as station}
-			<button
-				class="icon result"
-				onclick={() => {
-					ctx.map?.flyTo({
-						center: [station.latitude, station.longitude],
-						zoom: 15,
-					});
-				}}>
-				<strong>{station.name}</strong>
-				<small>({station.railway})</small>
-			</button>
-		{/each}
+		{#if search.searching}
+			<p>Searching...</p>
+		{:else}
+			{#each search.results as station}
+				<button
+					class="icon result"
+					onclick={() => {
+						ctx.map?.flyTo({
+							center: [station.latitude, station.longitude],
+							zoom: 15,
+						});
+					}}>
+					<strong>{station.name}</strong>
+					<small>({station.railway})</small>
+				</button>
+			{/each}
+		{/if}
 	</div>
 </div>
 
