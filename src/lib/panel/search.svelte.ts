@@ -1,6 +1,4 @@
-// import { version } from '../../../package.json';
-
-const version = '0.1.0';
+import { VERSION } from '$lib/version';
 
 interface SearchResult {
 	latitude: number;
@@ -37,7 +35,7 @@ class Search {
 		const response = await fetch(url, {
 			signal: controller.signal,
 			headers: {
-				'user-agent': `StationRecord/${version} (+https://github.com/danstewart/StationRecord)`,
+				'user-agent': `StationRecord/${VERSION} (+https://github.com/danstewart/StationRecord)`,
 			},
 		});
 

@@ -1,17 +1,18 @@
 {
 	"name": "train-stations",
 	"private": true,
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
+		"prepare": "pnpm run version && svelte-kit sync",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
-		"lint": "prettier --check ."
+		"lint": "prettier --check .",
+		"version": "echo -e \"export const VERSION: string = '$(jq -r .version package.json)';\" > src/lib/version.ts"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.8",
