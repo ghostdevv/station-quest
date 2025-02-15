@@ -1,4 +1,5 @@
 <script lang="ts">
+	import IconOffline from 'lucide-svelte/icons/wifi-off';
 	import { search } from './search.svelte';
 	import { ctx } from '$lib/state.svelte';
 	import { VERSION } from '$lib/version';
@@ -12,12 +13,24 @@
 		debouncedSearch.current;
 		untrack(() => search.search(debouncedSearch.current));
 	});
+
+	let online = $state(true);
 </script>
+
+<svelte:window bind:online />
 
 <div class="panel">
 	<header>
-		<h4>StationQuest</h4>
-		<small>v{VERSION}</small>
+		<h4 class="title">
+			StationQuest
+			<span class="version">v{VERSION}</span>
+		</h4>
+
+		{#if !online}
+			<div title="You're offline">
+				<IconOffline color="var(--red)" size={18} />
+			</div>
+		{/if}
 	</header>
 
 	<input type="search" placeholder="Search..." bind:value={searchQuery} />
@@ -55,14 +68,18 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
+	}
 
-		header {
-			h4 {
-				display: inline-block;
-			}
+	header {
+		display: flex;
+		align-items: center;
+		width: 100%;
 
-			small {
-				display: inline-block;
+		.title {
+			margin-right: auto;
+
+			.version {
+				font-size: 0.9rem;
 				color: var(--text-grey);
 			}
 		}
