@@ -23,8 +23,15 @@ class Search {
 	}
 
 	async search(query: string) {
-		console.log('Searching', query);
 		this.#abortController?.abort('new query');
+
+		if (query.length === 0) {
+			console.log('Skipping search');
+			this.#results = [];
+			return;
+		}
+
+		console.log(`Searching "${query}"`);
 
 		const controller = new AbortController();
 		this.#abortController = controller;

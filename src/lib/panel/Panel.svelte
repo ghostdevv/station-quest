@@ -6,23 +6,24 @@
 	import { untrack } from 'svelte';
 
 	let searchQuery = $state('');
-	const debouncedSearch = new Debounced(() => searchQuery);
+	const debouncedSearch = new Debounced(() => searchQuery.trim());
+
+	$inspect(searchQuery);
 
 	$effect(() => {
-		if (debouncedSearch.current) {
-			untrack(() => search.search(debouncedSearch.current));
-		}
+		debouncedSearch.current;
+		untrack(() => search.search(debouncedSearch.current));
 	});
 </script>
 
 <div class="panel">
 	<header>
-		<h3>StationRecord</h3>
+		<h4>StationRecord</h4>
 		<small>v{VERSION}</small>
 		<hr />
 	</header>
 
-	<input type="search" bind:value={searchQuery} />
+	<input type="search" placeholder="Search..." bind:value={searchQuery} />
 
 	<div class="results">
 		{#each search.results as station}
@@ -46,11 +47,12 @@
 		background-color: var(--background-secondary);
 		border-radius: 12px;
 		height: 100%;
+		max-height: 100%;
 		padding: 22px;
 		min-width: 240px;
 
 		header {
-			h3 {
+			h4 {
 				display: inline-block;
 			}
 
@@ -65,6 +67,9 @@
 		flex-direction: column;
 		margin: 8px 0px;
 		gap: 8px;
+
+		max-height: 100%;
+		overflow: auto;
 
 		.result {
 			text-align: left;
