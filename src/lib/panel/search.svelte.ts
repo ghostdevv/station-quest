@@ -56,8 +56,12 @@ class Search {
 			return;
 		}
 
-		this.#results = await response.json();
+		const data: SearchResult[] = await response.json();
+
+		this.#results = data;
 		this.#abortController = null;
+
+		console.log('Search Results:', { query, data });
 	}
 }
 
