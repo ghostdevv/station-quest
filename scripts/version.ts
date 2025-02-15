@@ -7,6 +7,6 @@ const { version } = JSON.parse(
 
 await writeFile(
 	join(import.meta.dirname, '../src/lib/version.ts'),
-	`export const version = '${version}';\n`,
+	`export const VERSION = '${version}';\n`,
 	'utf-8',
 );
