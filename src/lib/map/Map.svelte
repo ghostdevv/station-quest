@@ -66,7 +66,7 @@
 
 	<RasterTileSource
 		id="railway"
-		attribution={`Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Style: <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a> <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a> Data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>, Service by <a href="http://www.openrailwaymap.org/">OpenRailwayMap</a>`}
+		attribution={`<a href="http://www.openrailwaymap.org/">OpenRailwayMap</a> (<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA 2.0</a>)`}
 		tiles={[
 			`https://a.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
 			`https://b.tiles.openrailwaymap.org/${style}/{z}/{x}/{y}.png`,
