@@ -1,18 +1,7 @@
 <script lang="ts">
 	import IconOffline from 'lucide-svelte/icons/wifi-off';
-	import { search } from './search.svelte';
-	import { ctx } from '$lib/state.svelte';
 	import { VERSION } from '$lib/version';
-	import { Debounced } from 'runed';
-	import { untrack } from 'svelte';
-
-	let searchQuery = $state('');
-	const debouncedSearch = new Debounced(() => searchQuery.trim());
-
-	$effect(() => {
-		debouncedSearch.current;
-		untrack(() => search.search(debouncedSearch.current));
-	});
+	import Search from './Search.svelte';
 
 	let online = $state(true);
 </script>
@@ -33,27 +22,14 @@
 		{/if}
 	</header>
 
-	<input type="search" placeholder="Search..." bind:value={searchQuery} />
+	<svelte:boundary>
+		<Search />
 
-	<div class="results">
-		{#if search.searching}
-			<p>Searching...</p>
-		{:else}
-			{#each search.results as station}
-				<button
-					class="icon result"
-					onclick={() => {
-						ctx.map?.flyTo({
-							center: [station.latitude, station.longitude],
-							zoom: 15,
-						});
-					}}>
-					<strong>{station.name}</strong>
-					<small>({station.railway?.replaceAll('_', ' ')})</small>
-				</button>
-			{/each}
-		{/if}
-	</div>
+		{#snippet failed(error, reset)}
+			<p><small>{error}</small></p>
+			<button class="icon" onclick={reset}>retry</button>
+		{/snippet}
+	</svelte:boundary>
 </div>
 
 <style>

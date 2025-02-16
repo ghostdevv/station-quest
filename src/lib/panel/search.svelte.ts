@@ -47,12 +47,10 @@ class Search {
 		});
 
 		if (!response.ok) {
-			// todo
-			return;
+			throw new Error('Failed to fetch search results');
 		}
 
 		if (controller.signal.aborted) {
-			// todo
 			return;
 		}
 
