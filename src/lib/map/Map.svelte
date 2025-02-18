@@ -54,6 +54,12 @@
 	zoom={4}
 	center={{ lng: -0.114, lat: 51.503 }}
 	attributionControl={false}>
+	{#if ctx.direction == 'vertical'}
+		<CustomControl class="title" position="bottom-left">
+			<p>StationQuest</p>
+		</CustomControl>
+	{/if}
+
 	<ScaleControl position="bottom-left" />
 	<AttributionControl compact position="top-right" />
 	<NavigationControl position={mainControlPosition} />

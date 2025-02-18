@@ -17,22 +17,15 @@
 
 <svelte:window bind:online />
 
-<div class="panel" class:side-nav={ctx.direction == 'vertical'}>
-	{#if ctx.direction == 'horizontal'}
-		<header>
-			<h4 class="title">
-				StationQuest
-				<span class="version">v{VERSION}</span>
-			</h4>
-
-			{#if !online}
-				<div title="You're offline">
-					<IconOffline color="var(--red)" size={18} />
-				</div>
-			{/if}
-		</header>
+{#snippet offlineIndicator()}
+	{#if !online}
+		<div title="You're offline">
+			<IconOffline color="var(--red)" size={18} />
+		</div>
 	{/if}
+{/snippet}
 
+<div class="panel" class:side-nav={ctx.direction == 'vertical'}>
 	<div class="content">
 		{@render children()}
 	</div>
@@ -47,9 +40,17 @@
 		</a>
 
 		{#if ctx.direction == 'vertical'}
+			{@render offlineIndicator()}
 			<p class="version">v{VERSION}</p>
 		{/if}
 	</div>
+
+	{#if ctx.direction == 'horizontal'}
+		<div class="footer">
+			<p class="version"><strong>StationQuest</strong> v{VERSION}</p>
+			{@render offlineIndicator()}
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -58,32 +59,19 @@
 		border-radius: 12px;
 		height: 100%;
 		max-height: 100%;
-		padding: 12px 10px;
+		padding: 10px;
 		min-width: 240px;
 
 		display: grid;
 		gap: 12px;
 		grid-template-rows: max-content 1fr max-content;
 		grid-template-columns: 1fr;
-		grid-template-areas: 'header' 'content' 'tabs';
+		grid-template-areas: 'tabs' 'content' 'footer';
 
 		&.side-nav {
 			grid-template-columns: 1fr max-content;
 			grid-template-rows: 1fr;
 			grid-template-areas: 'content tabs';
-		}
-	}
-
-	header {
-		display: flex;
-		align-items: center;
-		width: 100%;
-		grid-area: header;
-
-		padding: 4px;
-
-		.title {
-			margin-right: auto;
 		}
 	}
 
@@ -96,6 +84,14 @@
 		width: 100%;
 		height: 100%;
 		grid-area: content;
+	}
+
+	.footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		border-top: 2px solid var(--background-tertiary);
+		padding-top: 10px;
 	}
 
 	.tabs {
@@ -113,8 +109,8 @@
 		justify-content: flex-start;
 		gap: 16px;
 
-		.version {
-			margin-top: auto;
+		a:last-of-type {
+			margin-bottom: auto;
 		}
 	}
 </style>
