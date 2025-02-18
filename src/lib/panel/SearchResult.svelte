@@ -4,38 +4,14 @@
 	import type { SearchResult } from './search.svelte';
 	import { Inspect } from 'svelte-inspect-value';
 	import { ctx } from '$lib/state.svelte';
+	import Modal from '$lib/Modal.svelte';
 
 	interface Props {
 		station: SearchResult;
 	}
 
 	const { station }: Props = $props();
-
-	let inspectDialog = $state<HTMLDialogElement>();
-
-	// Based on code from https://stackoverflow.com/a/57463812
-	function click(event: MouseEvent) {
-		if (!inspectDialog || event.target != inspectDialog) return;
-
-		const rect = inspectDialog.getBoundingClientRect();
-
-		const clickedInDialog =
-			rect.top <= event.clientY &&
-			event.clientY <= rect.top + rect.height &&
-			rect.left <= event.clientX &&
-			event.clientX <= rect.left + rect.width;
-
-		if (clickedInDialog === false) {
-			inspectDialog?.close();
-		}
-	}
 </script>
-
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<dialog bind:this={inspectDialog} onclick={click}>
-	<Inspect value={station} />
-</dialog>
 
 <details class="result">
 	<summary>
@@ -55,13 +31,17 @@
 			<IconLocate size={18} />
 		</button>
 
-		<button
-			class="icon"
-			onclick={() => {
-				inspectDialog?.showModal();
-			}}>
-			<IconView size={18} />
-		</button>
+		<Modal>
+			{#snippet activator()}
+				<button class="icon">
+					<IconView size={18} />
+				</button>
+			{/snippet}
+
+			{#snippet children()}
+				<Inspect value={station} />
+			{/snippet}
+		</Modal>
 	</div>
 </details>
 
