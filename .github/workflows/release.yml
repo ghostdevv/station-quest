@@ -30,6 +30,9 @@ jobs:
             - name: Install
               run: pnpm install --frozen-lockfile
 
+            - name: Build
+              run: pnpm build
+
             - name: Changelog
               run: pnpm exec changelogithub
               env:
