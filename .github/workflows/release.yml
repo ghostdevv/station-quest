@@ -37,3 +37,11 @@ jobs:
               run: pnpm exec changelogithub
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Deploy
+              uses: cloudflare/wrangler-action@v3
+              with:
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+                  accountId: 44321e1b7fbd29b56b65c1890a3bbee2
+                  command: pages deploy build --project-name=station-quest
