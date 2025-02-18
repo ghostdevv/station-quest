@@ -1,0 +1,39 @@
+name: Release
+
+permissions:
+    contents: write
+
+on:
+    push:
+        tags:
+            - 'v*'
+
+jobs:
+    publish-npm:
+        runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node 22
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  registry-url: https://registry.npmjs.org/
+
+            - name: Setup PNPM
+              uses: pnpm/action-setup@v4.0.0
+              with:
+                  version: 9.12.2
+
+            - name: Install
+              run: pnpm install --frozen-lockfile
+
+            - name: Changelog
+              run: pnpm exec changelogithub
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,6 @@
 import { VERSION } from '$lib/version';
 
-export interface SearchResult {
+interface RawSearchResult {
 	latitude: number;
 	longitude: number;
 	osm_id: number;
@@ -9,6 +9,10 @@ export interface SearchResult {
 	railway?: 'station' | 'junction' | 'halt' | 'yard' | 'tram_stop';
 	operator?: string;
 }
+
+export type SearchResult = Omit<RawSearchResult, 'name'> & {
+	name: string;
+};
 
 class Search {
 	#results = $state<SearchResult[]>([]);
@@ -54,12 +58,16 @@ class Search {
 			return;
 		}
 
-		const data: SearchResult[] = await response.json();
+		const data: RawSearchResult[] = await response.json();
 
-		this.#results = data;
+		const parsed = data.filter(
+			(result): result is SearchResult => !!result.name,
+		);
+
+		this.#results = parsed;
 		this.#abortController = null;
 
-		console.log('Search Results:', { query, data });
+		console.log('Search Results:', { query, data, parsed });
 	}
 }
 

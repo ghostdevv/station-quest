@@ -5,6 +5,13 @@
 	import { type Direction, ctx } from '$lib/state.svelte';
 	import Panel from '$lib/panel/Panel.svelte';
 	import Map from '$lib/map/Map.svelte';
+	import type { Snippet } from 'svelte';
+
+	interface Props {
+		children: Snippet;
+	}
+
+	const { children }: Props = $props();
 
 	let isDragging = $state(false);
 	let innerWidth = $state(0);
@@ -31,7 +38,7 @@
 		onCollapse={() => (collapsed = true)}
 		onExpand={() => (collapsed = false)}
 		collapsible>
-		<Panel />
+		<Panel {children} />
 	</Pane>
 
 	<PaneResizer

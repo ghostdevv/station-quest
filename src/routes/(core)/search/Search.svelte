@@ -15,8 +15,6 @@
 			searchPromise = search.search(debouncedSearch.current);
 		});
 	});
-
-	let online = $state(true);
 </script>
 
 <input type="search" placeholder="Search..." bind:value={searchQuery} />
@@ -39,6 +37,7 @@
 		flex-direction: column;
 		gap: 8px;
 
+		margin-top: 12px;
 		max-height: 100%;
 		overflow: auto;
 		flex-grow: 1;
