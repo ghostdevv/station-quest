@@ -1,6 +1,6 @@
 import { VERSION } from '$lib/version';
 
-interface SearchResult {
+export interface SearchResult {
 	latitude: number;
 	longitude: number;
 	osm_id: number;
