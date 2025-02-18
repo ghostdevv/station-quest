@@ -93,6 +93,7 @@
 		width: 100%;
 		height: 100%;
 		grid-area: content;
+		overflow: auto;
 	}
 
 	.footer {
