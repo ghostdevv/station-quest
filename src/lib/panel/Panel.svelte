@@ -60,19 +60,4 @@
 			}
 		}
 	}
-
-	.results {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-
-		max-height: 100%;
-		overflow: auto;
-		flex-grow: 1;
-
-		.result {
-			text-align: left;
-			text-transform: capitalize;
-		}
-	}
 </style>
