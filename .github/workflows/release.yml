@@ -9,7 +9,7 @@ on:
             - 'v*'
 
 jobs:
-    publish-npm:
+    release:
         runs-on: ubuntu-latest
         permissions:
             id-token: write
