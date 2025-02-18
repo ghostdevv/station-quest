@@ -20,6 +20,9 @@ importers:
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.4
+      dexie:
+        specifier: ^4.0.11
+        version: 4.0.11
       ghostsui:
         specifier: 2.0.0-beta.2
         version: 2.0.0-beta.2
@@ -788,6 +791,9 @@ packages:
 
   devalue@5.1.1:
     resolution: {integrity: sha512-maua5KUiapvEwiEAe+XnlZ3Rh0GD+qI1J/nb9vrJc3muPXvcF/8gXYTWF76+5DAqHyDUtOIImEuo0YKE9mshVw==}
+
+  dexie@4.0.11:
+    resolution: {integrity: sha512-SOKO002EqlvBYYKQSew3iymBoN2EQ4BDw/3yprjh7kAfFzjBYkaMNa/pZvcA7HSWlcKSQb9XhPe3wKyQ0x4A8A==}
 
   earcut@2.2.4:
     resolution: {integrity: sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==}
@@ -1727,6 +1733,8 @@ snapshots:
     optional: true
 
   devalue@5.1.1: {}
+
+  dexie@4.0.11: {}
 
   earcut@2.2.4: {}
 
