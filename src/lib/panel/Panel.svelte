@@ -1,6 +1,7 @@
 <script lang="ts">
 	import IconOffline from 'lucide-svelte/icons/wifi-off';
-	import IconSeaarch from 'lucide-svelte/icons/search';
+	import IconSearch from 'lucide-svelte/icons/search';
+	import IconInfo from 'lucide-svelte/icons/info';
 	import { ctx } from '$lib/state.svelte';
 	import { VERSION } from '$lib/version';
 	import type { Snippet } from 'svelte';
@@ -36,7 +37,15 @@
 			title="Search"
 			class="button icon"
 			class:active={page.url.pathname.startsWith('/search')}>
-			<IconSeaarch />
+			<IconSearch />
+		</a>
+
+		<a
+			href="/about"
+			title="About"
+			class="button icon"
+			class:active={page.url.pathname.startsWith('/about')}>
+			<IconInfo />
 		</a>
 
 		{#if ctx.direction == 'vertical'}
