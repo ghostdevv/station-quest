@@ -20,6 +20,7 @@
     "@sveltejs/vite-plugin-svelte": "^5.0.0",
     "@types/node": "^22.13.4",
     "changelogithub": "^13.12.1",
+    "date-fns": "^4.1.0",
     "dexie": "^4.0.11",
     "ghostsui": "2.0.0-beta.2",
     "lucide-svelte": "^0.475.0",

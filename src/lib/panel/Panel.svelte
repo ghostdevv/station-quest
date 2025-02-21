@@ -1,5 +1,6 @@
 <script lang="ts">
 	import IconOffline from 'lucide-svelte/icons/wifi-off';
+	import IconHistory from 'lucide-svelte/icons/history';
 	import IconSearch from 'lucide-svelte/icons/search';
 	import IconInfo from 'lucide-svelte/icons/info';
 	import { ctx } from '$lib/state.svelte';
@@ -38,6 +39,14 @@
 			class="button icon"
 			class:active={page.url.pathname.startsWith('/search')}>
 			<IconSearch />
+		</a>
+
+		<a
+			href="/history"
+			title="History"
+			class="button icon"
+			class:active={page.url.pathname.startsWith('/history')}>
+			<IconHistory />
 		</a>
 
 		<a

@@ -5,13 +5,13 @@ const db = new Dexie('station-quest') as Dexie & {
 	station: EntityTable<Station, 'id'>;
 };
 
-interface Visit {
+export interface Visit {
 	id: number;
 	stationId: number;
 	date: string;
 }
 
-interface Station {
+export interface Station {
 	id: number;
 	name: string;
 	osmId: number;
@@ -52,6 +52,8 @@ class StationsDb {
 
 export const stationsDb = new StationsDb();
 
+export type VisitsListResult = (Visit & { station: Station })[];
+
 class VisitsDb {
 	async get(id: number) {
 		return (await db.visits.get(id)) || null;
@@ -60,6 +62,17 @@ class VisitsDb {
 	async add(visit: Omit<Visit, 'id'>) {
 		const id = await db.visits.add(visit);
 		return (await this.get(id))!;
+	}
+
+	async list() {
+		const visits: VisitsListResult = [];
+
+		for (const visit of await db.visits.toArray()) {
+			const station = await stationsDb.get(visit.stationId);
+			visits.push({ ...visit, station: station! });
+		}
+
+		return visits;
 	}
 }
 
