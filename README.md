@@ -1,38 +1,11 @@
-# sv
+# Station Quest
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+StationQuest is an app for exploring the train networks in the world, and recording visits to them. We completely rely on data from [Open Railway Map](https://wiki.openstreetmap.org/wiki/OpenRailwayMap) so please donate to them if you find this useful.
 
-## Creating a project
+## Installation
 
-If you're seeing this, you've probably already done this step. Congrats!
+The web app is available here: https://station-quest.willow.sh and can be installed as a PWA
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Roadmap
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+https://github.com/ghostdevv/station-quest/issues
