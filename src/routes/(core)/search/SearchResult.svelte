@@ -41,8 +41,7 @@
 
 		const visit = await visitsDb.add({
 			stationId: stationRecord.id,
-			// todo save this with users tz offset preserved
-			date: date.toISOString(),
+			date: formatISO(date),
 			type,
 		});
 
