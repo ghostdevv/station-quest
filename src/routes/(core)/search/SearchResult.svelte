@@ -6,6 +6,7 @@
 	import { Inspect } from 'svelte-inspect-value';
 	import { ctx } from '$lib/state.svelte';
 	import Modal from '$lib/Modal.svelte';
+	import { formatISO } from 'date-fns';
 	import {
 		type VisitType,
 		VISIT_TYPES,
@@ -99,6 +100,7 @@
 							name="date"
 							type="datetime-local"
 							disabled={addingVisit}
+							value={formatISO(new Date()).slice(0, 16)}
 							required />
 					</label>
 
