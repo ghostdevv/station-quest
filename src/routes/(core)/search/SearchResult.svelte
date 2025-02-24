@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { stationsDb, visitsDb } from '$lib/storage.svelte';
 	import IconLocate from 'lucide-svelte/icons/map-pin';
 	import IconView from 'lucide-svelte/icons/telescope';
 	import type { SearchResult } from './search.svelte';
@@ -7,6 +6,12 @@
 	import { Inspect } from 'svelte-inspect-value';
 	import { ctx } from '$lib/state.svelte';
 	import Modal from '$lib/Modal.svelte';
+	import {
+		type VisitType,
+		VISIT_TYPES,
+		stationsDb,
+		visitsDb,
+	} from '$lib/storage.svelte';
 
 	interface Props {
 		station: SearchResult;
@@ -24,6 +29,7 @@
 
 		const form = new FormData(event.currentTarget);
 		const date = new Date(form.get('date') as string);
+		const type = form.get('type') as VisitType;
 
 		const stationRecord = await stationsDb.getOrCreate({
 			name: station.name,
@@ -36,6 +42,7 @@
 			stationId: stationRecord.id,
 			// todo save this with users tz offset preserved
 			date: date.toISOString(),
+			type,
 		});
 
 		console.log('Saved visit:', visit);
@@ -87,12 +94,21 @@
 
 				<form class="record-visit" onsubmit={addVisit}>
 					<label>
-						<span class="sr-only">When</span>
+						<span>When</span>
 						<input
 							name="date"
 							type="datetime-local"
 							disabled={addingVisit}
 							required />
+					</label>
+
+					<label>
+						<span>Visit Type</span>
+						<select name="type" disabled={addingVisit} required>
+							{#each VISIT_TYPES as visit}
+								<option value={visit}>{visit}</option>
+							{/each}
+						</select>
 					</label>
 
 					<button disabled={addingVisit}>
@@ -124,14 +140,13 @@
 	}
 
 	.record-visit {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: flex-start;
-		gap: 8px;
-
 		label {
 			flex-grow: 1;
+			width: 100%;
+		}
+
+		option {
+			text-transform: capitalize;
 		}
 	}
 </style>

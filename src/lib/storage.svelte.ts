@@ -5,10 +5,21 @@ const db = new Dexie('station-quest') as Dexie & {
 	station: EntityTable<Station, 'id'>;
 };
 
+export const VISIT_TYPES = Object.freeze([
+	'alighted',
+	'boarded',
+	'pass',
+	'transferred',
+	'unknown',
+] as const);
+
+export type VisitType = (typeof VISIT_TYPES)[number];
+
 export interface Visit {
 	id: number;
 	stationId: number;
 	date: string;
+	type: VisitType;
 }
 
 export interface Station {
@@ -23,6 +34,20 @@ db.version(1).stores({
 	visits: '++id, stationId, date',
 	station: '++id, name, osmId, lat, lng',
 });
+
+db.version(2)
+	.stores({
+		visits: '++id, stationId, date, type',
+		station: '++id, name, osmId, lat, lng',
+	})
+	.upgrade(async (tx) => {
+		await tx
+			.table('visits')
+			.toCollection()
+			.modify((visit) => {
+				visit.type = 'unknown';
+			});
+	});
 
 class StationsDb {
 	async get(stationId: number) {
