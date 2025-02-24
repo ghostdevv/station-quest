@@ -35,4 +35,8 @@
 		font-size: 1rem;
 		color: var(--text-grey);
 	}
+
+	p {
+		line-height: 1.6;
+	}
 </style>
