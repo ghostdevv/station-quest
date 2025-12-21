@@ -43,7 +43,7 @@
 
 	<PaneResizer
 		class="resizer"
-		onDraggingChange={(v: boolean) => {
+		onDraggingChange={(v) => {
 			isDragging = v;
 		}}>
 		<div
