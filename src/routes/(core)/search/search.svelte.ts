@@ -46,7 +46,7 @@ class Search {
 		const response = await fetch(url, {
 			signal: controller.signal,
 			headers: {
-				'user-agent': `StationQuest/${VERSION} (+https://github.com/danstewart/StationQuest)`,
+				'user-agent': `StationQuest/${VERSION} (+https://github.com/ghostdevv/station-quest)`,
 			},
 		});
 
