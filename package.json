@@ -37,7 +37,7 @@
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.0",
-    "wrangler": "^4.56.0"
+    "wrangler": "^4.59.1"
   },
   "packageManager": "pnpm@9.12.2",
   "pnpm": {
