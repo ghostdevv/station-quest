@@ -30,7 +30,7 @@
     "prettier-plugin-svelte": "^3.4.1",
     "runed": "^0.37.1",
     "sass": "^1.97.1",
-    "svelte": "^5.46.0",
+    "svelte": "^5.53.5",
     "svelte-check": "^4.3.5",
     "svelte-inspect-value": "^0.10.0",
     "svelte-maplibre-gl": "^1.0.2",
